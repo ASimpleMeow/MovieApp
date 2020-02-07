@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import HomePage from "./pages/homePage";
 import MoviePage from './pages/movieDetailsPage'
+import "../src/globals/fontawesome"
 
 const sample = {
   adult: false,
