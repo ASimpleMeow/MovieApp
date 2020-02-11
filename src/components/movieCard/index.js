@@ -1,6 +1,7 @@
 import React from "react";
 import "./movieCard.css";
 import { Link } from "react-router-dom";
+import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const MovieCard = props => {
@@ -10,7 +11,7 @@ const MovieCard = props => {
         <Link to={`/movies/${props.movie.id}`}>
           <img
             className="card-img-tag center "
-            alt={movie.title}
+            alt={props.movie.title}
             src={
               props.movie.poster_path
                 ? `https://image.tmdb.org/t/p/w500/${props.movie.poster_path}`
