@@ -3,16 +3,12 @@ import { Link, Route } from "react-router-dom";
 import MovieReviews from "../components/movieReviews";
 import MovieDetails from "../components/movieDetails";
 import PageTemplate from "../components/templateMoviePage";
+import useMovie from "../hooks/useMovie";
 import {getMovie} from '../api/tmdb-api'
 
 const MoviePage = props => {
   const { id } = props.match.params;
-  const [movie, setMovie] = useState(null);
-  useEffect(() => {
-    getMovie(id).then(movie => {
-      setMovie(movie);
-    });
-  }, [id]);
+  const [movie] = useMovie(id);
   return (
     <>
     {movie ? (
