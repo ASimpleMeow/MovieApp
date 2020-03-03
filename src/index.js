@@ -6,6 +6,7 @@ import HomePage from "./pages/homePage";
 import FavoriteMoviesPage from "./pages/favoritesMoviesPage";
 import MoviePage from './pages/moviePage'
 import MovieReviewPage from './pages/movieReviewPage'
+import AddMovieReviewPage from './pages/addMovieReviewPage'
 import SiteHeader from './components/siteHeader'
 import MoviesContextProvider from "./contexts/moviesContext"
 import GenresContextProvider from "./contexts/genresContext"
@@ -19,6 +20,7 @@ const App = () => {
         <MoviesContextProvider>
           <GenresContextProvider>
             <Switch>
+              <Route exact path="/reviews/form" component={AddMovieReviewPage} />
               <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
               <Route path="/movies/:id" component={MoviePage} />
               <Route path="/reviews/:id" component={MovieReviewPage} />
