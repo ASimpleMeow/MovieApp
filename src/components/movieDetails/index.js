@@ -1,7 +1,11 @@
 import React from "react";
+import useCredits from "../../hooks/useMovieCredits";
+import CastCard from "../castCard";
 import "./movieDetails.css";
 
 export default ({ movie }) => {
+  const [credits] = useCredits(movie.id);
+  console.log(credits)
   return (
     <>
       <h4>Overview</h4>
@@ -61,6 +65,12 @@ export default ({ movie }) => {
           </li>
         ))}
       </ul>
+      <h4>Cast</h4>
+      <div className="container">
+        <div className="row">
+            {credits && credits.map(cast => (<CastCard cast={cast}/>))}
+        </div>
+      </div>
     </>
   );
 };
