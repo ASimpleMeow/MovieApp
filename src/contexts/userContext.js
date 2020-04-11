@@ -6,13 +6,32 @@ export const UserContext = React.createContext(null)
 const UserContextProvider = props => {
   const [user, setUser] = useState(undefined);
 
-  const authenticate = (username, password, cb) => {
+  const authenticate = (user, cb) => {
     setTimeout(() => {
-        const validUser = StubAPI.getUser(username, password);
+        const validUser = StubAPI.getUser(user.username, user.password);
         setUser(validUser)
-        cb(validUser ? true : false);
+        const status = validUser ? true : false;
+        if (status) {
+          cb(status);
+        } else {
+          cb(false, "User could not be validated, please check your username and password");
+        }
       }, 100);
   } 
+
+  const register = (newUser, cb) => {
+    setTimeout(() => {
+      if (newUser.password && (newUser.password === newUser.confirmPassword)) {
+        const validUser = StubAPI.createUser(newUser.username, newUser.password);
+        setUser(validUser);
+        const status = validUser ? true : false;
+        if (status) cb(status);
+        else cb(status, "Could not create user it may already exist!");
+      } else {
+        cb(false, "Passwords must match!")
+      }
+    }, 100);
+  }
 
   const signOut = cb => {
       setUser(undefined);
@@ -24,6 +43,7 @@ const UserContextProvider = props => {
       value={{
         user: user,
         authenticate: authenticate,
+        register: register,
         signOut: signOut
       }}
     >

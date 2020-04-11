@@ -1,25 +1,26 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import {UserContext} from '../contexts/userContext';
-import LoginForm from "../components/loginForm";
+import RegisterForm from "../components/registerForm";
 
-const LoginPage = props => {
+const RegisterPage = (props) => {
   const [error, setError] = useState("");
-  const [loggedInStatue, setLoggedInStatus] = useState(false);
+  const [registered, setRegistered] = useState(false);
   const context = useContext(UserContext);
 
-  const login = (data) => {
-    context.authenticate(data, (status, err) => {
-      if (err) {
-        setError(err);
-      } else {
-        setLoggedInStatus(status);
-      }
-    });
+  const register = (data) => {
+    context.register(data, (status, err) => {
+        if (err) {
+            setError(err);
+        } else {
+            setRegistered(status);
+        }
+    }
+    );
   };
 
   const { from } = props.location.state || { from: { pathname: "/" } };
-  if (loggedInStatue) {
+  if (registered) {
     return <Redirect to={from} />;
   }
 
@@ -27,7 +28,7 @@ const LoginPage = props => {
     <div className="row">
       <div className="card col-md-6 mx-auto my-5">
         <div className="card-body">
-          <LoginForm action={login} redirect={from}/>
+          <RegisterForm action={register}/>
           <p className="text-danger">{error}</p>
         </div>
       </div>
@@ -35,4 +36,4 @@ const LoginPage = props => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

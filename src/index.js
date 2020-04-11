@@ -10,6 +10,7 @@ import ActorPage from './pages/actorPage'
 import MovieReviewPage from './pages/movieReviewPage'
 import AddMovieReviewPage from './pages/addMovieReviewPage'
 import LoginPage from './pages/loginPage';
+import RegisterPage from './pages/registerPage';
 import SiteHeader from './components/siteHeader'
 import UserContextProvider from "./contexts/userContext"
 import MoviesContextProvider from "./contexts/moviesContext"
@@ -26,6 +27,7 @@ const App = () => {
             <GenresContextProvider>
               <Switch>
                 <Route path='/login' component={ LoginPage } />
+                <Route path='/register' component={ RegisterPage } />
                 <PrivateRoute exact path="/reviews/form" component={AddMovieReviewPage} />
                 <PrivateRoute exact path="/movies/favorites" component={FavoriteMoviesPage} />
                 <Route exact path="/actor/:id" component={ActorPage} />

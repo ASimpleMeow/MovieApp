@@ -23,6 +23,15 @@ class StubAPI {
     getUser(username, password) {
         return this.users.find(user => user.username === username && user.password === password);
     }
+
+    createUser(username, password) {
+        const userExits = this.getUser(username, password);
+        if (userExits) return null; // User already exits!
+        const lastUser = this.users[this.users.length - 1];
+        const newUser = {id: lastUser.id + 1, username: username, password: password};
+        this.users.push(newUser);
+        return newUser;
+    }
 }
 
 export default new StubAPI();
