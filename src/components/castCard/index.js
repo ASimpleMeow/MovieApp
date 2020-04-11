@@ -13,7 +13,7 @@ const CastCard = ({cast}) => {
                 src={
                     cast.profile_path
                     ? `https://image.tmdb.org/t/p/w500/${cast.profile_path}`
-                    : "./film-poster-placeholder.png"
+                    : "../film-poster-placeholder.png"
                 }
                 />
           </Link>
