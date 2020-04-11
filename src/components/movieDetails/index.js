@@ -5,7 +5,6 @@ import "./movieDetails.css";
 
 export default ({ movie }) => {
   const [credits] = useCredits(movie.id);
-  console.log(credits)
   return (
     <>
       <h4>Overview</h4>

@@ -2,12 +2,11 @@ import React from "react";
 import "./castCard.css"
 import { Link } from "react-router-dom";
 import "../../globals/fontawesome";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CastCard = ({cast}) => {
     return (
     <div className="col-sm-2 card-body">
-          <Link to={`/credit/${cast.credit_id}`}>
+          <Link to={`/actor/${cast.id}`}>
                 <img
                 className="card-img-tag center img-thumbnail"
                 alt={cast.name}

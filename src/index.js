@@ -6,6 +6,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import HomePage from "./pages/homePage";
 import FavoriteMoviesPage from "./pages/favoritesMoviesPage";
 import MoviePage from './pages/moviePage'
+import ActorPage from './pages/actorPage'
 import MovieReviewPage from './pages/movieReviewPage'
 import AddMovieReviewPage from './pages/addMovieReviewPage'
 import LoginPage from './pages/loginPage';
@@ -27,6 +28,7 @@ const App = () => {
                 <Route path='/login' component={ LoginPage } />
                 <Route exact path="/reviews/form" component={AddMovieReviewPage} />
                 <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
+                <Route exact path="/actor/:id" component={ActorPage} />
                 <Route path="/movies/:id" component={MoviePage} />
                 <Route path="/reviews/:id" component={MovieReviewPage} />
                 <Route path="/" component={HomePage} />
