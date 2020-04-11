@@ -26,8 +26,8 @@ const App = () => {
             <GenresContextProvider>
               <Switch>
                 <Route path='/login' component={ LoginPage } />
-                <Route exact path="/reviews/form" component={AddMovieReviewPage} />
-                <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
+                <PrivateRoute exact path="/reviews/form" component={AddMovieReviewPage} />
+                <PrivateRoute exact path="/movies/favorites" component={FavoriteMoviesPage} />
                 <Route exact path="/actor/:id" component={ActorPage} />
                 <Route path="/movies/:id" component={MoviePage} />
                 <Route path="/reviews/:id" component={MovieReviewPage} />
