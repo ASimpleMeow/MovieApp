@@ -94,3 +94,39 @@ export const getMovies = () => {
       }
     ).then(res => res.json())
   }
+
+  export const addFavorite = (movie, user) => {
+    return fetch(
+      `/api/users/${user}/favourites`,{
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': window.localStorage.getItem('token')
+        },
+        body: JSON.stringify(movie)
+    }).then(res => res.json());
+  }
+
+  export const getFavourites = (user) => {
+    return fetch(
+      `/api/users/${user}/favourites`, {headers: {
+        'Authorization': window.localStorage.getItem('token')
+      }}
+    )
+      .then(res => res.json())
+  }
+  
+  export const addReview = (data) => {
+    const {movieId, author, content} = data;
+    return fetch(
+      `/api/movies/${movieId}/reviews`,{
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': window.localStorage.getItem('token')
+        },
+        body: JSON.stringify({author, content})
+    }).then(res => res.json());
+  }

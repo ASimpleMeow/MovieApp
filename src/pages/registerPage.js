@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import {UserContext} from '../contexts/userContext';
+import {MoviesContext} from '../contexts/moviesContext';
 import RegisterForm from "../components/registerForm";
 
 const RegisterPage = (props) => {
   const [error, setError] = useState("");
   const [registered, setRegistered] = useState(false);
   const context = useContext(UserContext);
+  const moviesContext = useContext(MoviesContext);
 
   const register = (data) => {
     context.register(data, (status, err) => {
@@ -14,6 +16,7 @@ const RegisterPage = (props) => {
             setError(err);
         } else {
             setRegistered(status);
+            moviesContext.setAuthenticated(status);
         }
     }
     );

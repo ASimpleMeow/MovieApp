@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import {UserContext} from '../contexts/userContext';
+import {MoviesContext} from '../contexts/moviesContext';
 import LoginForm from "../components/loginForm";
 
 const LoginPage = props => {
   const [error, setError] = useState("");
   const [loggedInStatus, setLoggedInStatus] = useState(false);
   const context = useContext(UserContext);
+  const moviesContext = useContext(MoviesContext);
 
   const login = (data) => {
     context.authenticate(data, (status, err) => {
@@ -14,6 +16,7 @@ const LoginPage = props => {
         setError(err);
       } else {
         setLoggedInStatus(status);
+        moviesContext.setAuthenticated(status);
       }
     });
   };

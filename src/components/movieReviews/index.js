@@ -10,7 +10,8 @@ export default ({ movie }) => {
     getMovieReviews(movie.id).then(reviews => {
       setReviews(reviews);
     });
-  }, []);
+  });
+
   return (
     <table className="table table-striped table-bordered table-hover">
       <thead>
@@ -21,7 +22,7 @@ export default ({ movie }) => {
         </tr>
       </thead>
       <tbody>
-        {reviews.map(r => {
+        {reviews && reviews.map(r => {
             return (
               <tr key={r.id}>
                 <td>{r.author}</td>

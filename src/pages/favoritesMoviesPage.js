@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import StubAPI from "../api/stubAPI";
 import PageTemplate from "../components/templateMovieListPage";
 import AddReviewButton from '../components/buttons/addReview'
+import {MoviesContext} from '../contexts/moviesContext';
 
 const FavoriteMoviesPage = props => {
+
+  const context = useContext(MoviesContext);
+
   return (
     <PageTemplate
-      movies={StubAPI.getAll()}
+      movies={context.favMovies}
       title={"Favorite Movies"}
       action={movie => <AddReviewButton movie={movie}/>}
     />

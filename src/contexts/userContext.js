@@ -5,11 +5,17 @@ export const UserContext = React.createContext(null)
 
 const UserContextProvider = props => {
   const existingToken = localStorage.getItem("token");
+  const existingUser = localStorage.getItem("user");
   const [authToken, setAuthToken] = useState(existingToken);
-  const [user, setUser] = useState(undefined);
+  const [user, setAuthUser] = useState(existingUser);
   const setToken = (data) => {
     localStorage.setItem('token', data);
     setAuthToken(data);
+  }
+
+  const setUser = (user) => {
+    localStorage.setItem('user', user);
+    setAuthUser(user);
   }
 
   const authenticate = (user, cb) => {
