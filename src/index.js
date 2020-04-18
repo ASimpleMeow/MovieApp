@@ -20,9 +20,9 @@ const App = () => {
   return (
     <BrowserRouter>
     <div className="jumbotron">
-      <SiteHeader/>
       <div className="container-fluid">
         <UserContextProvider>
+          <SiteHeader/>
           <MoviesContextProvider>
             <GenresContextProvider>
               <Switch>
@@ -30,10 +30,10 @@ const App = () => {
                 <Route path='/register' component={ RegisterPage } />
                 <PrivateRoute exact path="/reviews/form" component={AddMovieReviewPage} />
                 <PrivateRoute exact path="/movies/favorites" component={FavoriteMoviesPage} />
-                <Route exact path="/actor/:id" component={ActorPage} />
-                <Route path="/movies/:id" component={MoviePage} />
-                <Route path="/reviews/:id" component={MovieReviewPage} />
-                <Route path="/" component={HomePage} />
+                <PrivateRoute exact path="/actor/:id" component={ActorPage} />
+                <PrivateRoute path="/movies/:id" component={MoviePage} />
+                <PrivateRoute path="/reviews/:id" component={MovieReviewPage} />
+                <PrivateRoute path="/" component={HomePage} />
                 <Redirect from="*" to="/" />
               </Switch>
             </GenresContextProvider>

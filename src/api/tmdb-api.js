@@ -66,3 +66,31 @@ export const getMovies = () => {
       .then(res => res.json())
       .then(json => json.cast)
   }
+
+  export const loginUser = user => {
+    return fetch(
+      `/api/users`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': window.localStorage.getItem('token')
+        },
+        body: JSON.stringify(user)
+      }
+    ).then(res => res.json())
+  }
+
+  export const registerUser = user => {
+    return fetch(
+      `/api/users?action=register`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': window.localStorage.getItem('token')
+        },
+        body: JSON.stringify(user)
+      }
+    ).then(res => res.json())
+  }

@@ -1,11 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, Redirect } from "react-router-dom";
 import "../../globals/fontawesome";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../../globals/fontawesome";
 import "./siteHeader.css";
+import {UserContext} from '../../contexts/userContext';
+import { faLongArrowAltUp } from "@fortawesome/free-solid-svg-icons";
 
 const SiteHeader = () => {
+  const context = useContext(UserContext);
+
+  const logOut = () => {
+    context.signOut();
+    return <Redirect to="/"/>
+  };
+
   return (
     <nav className="navbar  navbar-light fixed-top  bg-dark ">
       <nav className="navbar-brand text-white">
@@ -38,10 +47,13 @@ const SiteHeader = () => {
               Favorites
             </Link>
           </li>
-        </ul>
-      </nav>
+          {context.user && <li className="nav-item nav-link text-white cursor-pointer" onClick={() => logOut()}>
+              Logout
+          </li>}
+      </ul>
     </nav>
-  );
+  </nav>
+);
 };
 
 export default SiteHeader;

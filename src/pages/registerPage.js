@@ -10,7 +10,7 @@ const RegisterPage = (props) => {
 
   const register = (data) => {
     context.register(data, (status, err) => {
-        if (err) {
+        if (!status && err) {
             setError(err);
         } else {
             setRegistered(status);

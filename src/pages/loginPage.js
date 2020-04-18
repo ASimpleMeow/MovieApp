@@ -5,12 +5,12 @@ import LoginForm from "../components/loginForm";
 
 const LoginPage = props => {
   const [error, setError] = useState("");
-  const [loggedInStatue, setLoggedInStatus] = useState(false);
+  const [loggedInStatus, setLoggedInStatus] = useState(false);
   const context = useContext(UserContext);
 
   const login = (data) => {
     context.authenticate(data, (status, err) => {
-      if (err) {
+      if (!status && err) {
         setError(err);
       } else {
         setLoggedInStatus(status);
@@ -19,7 +19,7 @@ const LoginPage = props => {
   };
 
   const { from } = props.location.state || { from: { pathname: "/" } };
-  if (loggedInStatue) {
+  if (loggedInStatus) {
     return <Redirect to={from} />;
   }
 

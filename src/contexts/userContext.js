@@ -1,47 +1,55 @@
 import React, { useState, useEffect } from "react";
-import StubAPI from '../api/stubAPI';
+import {loginUser, registerUser} from '../api/tmdb-api';
 
 export const UserContext = React.createContext(null)
 
 const UserContextProvider = props => {
+  const existingToken = localStorage.getItem("token");
+  const [authToken, setAuthToken] = useState(existingToken);
   const [user, setUser] = useState(undefined);
+  const setToken = (data) => {
+    localStorage.setItem('token', data);
+    setAuthToken(data);
+  }
 
   const authenticate = (user, cb) => {
-    setTimeout(() => {
-        const validUser = StubAPI.getUser(user.username, user.password);
-        setUser(validUser)
-        const status = validUser ? true : false;
-        if (status) {
-          cb(status);
-        } else {
-          cb(false, "User could not be validated, please check your username and password");
-        }
-      }, 100);
+    loginUser(user).then(result => {
+      if (!result.success) {
+        cb && cb(false, result.msg || "User could not be authenticated!")
+      } else {
+        setToken(result.token)
+        setUser(user.username);
+        cb && cb(true, "User athenticated successfully")
+      }
+    });
   } 
 
   const register = (newUser, cb) => {
-    setTimeout(() => {
-      if (newUser.password && (newUser.password === newUser.confirmPassword)) {
-        const validUser = StubAPI.createUser(newUser.username, newUser.password);
-        setUser(validUser);
-        const status = validUser ? true : false;
-        if (status) cb(status);
-        else cb(status, "Could not create user it may already exist!");
+    if (newUser.password !== newUser.confirmPassword) {
+      return cb(false, "Please make sure the passwords match!");
+    }
+    registerUser(newUser).then(result => {
+      if (result.code && result.code === 201) {
+        authenticate(newUser, success => {
+          if (success) cb && cb (success, "New user created and authenticated");
+          else cb && cb (false, "New user created but could not be authenticated");
+        });
       } else {
-        cb(false, "Passwords must match!")
+        cb && cb(false, "New user could not be created");
       }
-    }, 100);
+    });
   }
 
   const signOut = cb => {
+      setToken(undefined);
       setUser(undefined);
-      setTimeout(cb, 100);
   }
 
   return (
     <UserContext.Provider
       value={{
         user: user,
+        authToken: authToken,
         authenticate: authenticate,
         register: register,
         signOut: signOut
