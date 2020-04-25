@@ -33,8 +33,8 @@ const App = () => {
                 <PrivateRoute exact path="/actor/:id" component={ActorPage} />
                 <PrivateRoute path="/movies/:id" component={MoviePage} />
                 <PrivateRoute path="/reviews/:id" component={MovieReviewPage} />
-                <PrivateRoute path="/" component={HomePage} />
-                <Redirect from="*" to="/" />
+                <PrivateRoute path="/movies" component={HomePage} />
+                <Redirect from="*" to="/movies" />
               </Switch>
             </GenresContextProvider>
           </MoviesContextProvider>
